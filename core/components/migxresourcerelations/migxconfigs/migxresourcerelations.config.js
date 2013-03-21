@@ -1,0 +1,78 @@
+{
+  "id":71,
+  "name":"migxresourcerelations",
+  "formtabs":"[]",
+  "contextmenus":"remove",
+  "actionbuttons":"",
+  "columnbuttons":"",
+  "filters":"",
+  "extended":{
+    "migx_add":"",
+    "formcaption":"",
+    "win_id":"resourcerelations",
+    "multiple_formtabs":"",
+    "extrahandlers":"",
+    "packageName":"migxresourcerelations",
+    "classname":"rrResourceRelation",
+    "task":"resourcerelations",
+    "getlistsort":"",
+    "getlistsortdir":"",
+    "use_custom_prefix":"0",
+    "prefix":"",
+    "grid":"",
+    "gridload_mode":1,
+    "check_resid":"0",
+    "check_resid_TV":"",
+    "join_alias":"",
+    "getlistwhere":"",
+    "joins":"",
+    "cmpmaincaption":"",
+    "cmptabcaption":"resourcerelations",
+    "cmptabdescription":"you can check all resource-relations here for conflicting duplicates",
+    "cmptabcontroller":""
+  },
+  "columns":[
+    {
+      "MIGX_id":1,
+      "header":"ID",
+      "dataIndex":"id",
+      "renderer":"",
+      "sortable":"false",
+      "show_in_grid":1
+    },
+    {
+      "MIGX_id":2,
+      "header":"Source",
+      "dataIndex":"source_id",
+      "renderer":"",
+      "sortable":"false",
+      "show_in_grid":1
+    },
+    {
+      "MIGX_id":3,
+      "header":"Target",
+      "dataIndex":"target_id",
+      "renderer":"",
+      "sortable":"false",
+      "show_in_grid":1
+    },
+    {
+      "MIGX_id":4,
+      "header":"Published",
+      "dataIndex":"published",
+      "renderer":"this.renderCrossTick",
+      "sortable":"false",
+      "show_in_grid":1
+    }
+  ],
+  "createdby":1,
+  "createdon":"2013-03-16 06:40:50",
+  "editedby":1,
+  "editedon":"2013-03-16 06:41:56",
+  "deleted":0,
+  "deletedon":"-1-11-30 00:00:00",
+  "deletedby":0,
+  "published":1,
+  "publishedon":"2013-03-16 01:00:00",
+  "publishedby":0
+}
