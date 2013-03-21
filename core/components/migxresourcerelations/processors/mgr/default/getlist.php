@@ -17,7 +17,7 @@ foreach ($collection as $row) {
     $row['ResourceRelation_published'] = !empty($row['ResourceRelation_published']) ? 1 : 0;
     $row['ResourceRelation_active'] = !empty($row['ResourceRelation_active']) ? 1 : 0;    
     
-    if ($config['sourceortarget'] == 'source'){
+    if ($config['sourceortarget'] == 'source' || $config['sourceortarget'] == 'pullsources'){
         $row['published'] = $row['ResourceRelation_published'];
         $row['Joined_active'] = $row['ResourceRelation_active'];
     }

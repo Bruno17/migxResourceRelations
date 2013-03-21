@@ -46,7 +46,7 @@ switch ($config['sourceortarget']) {
                 if ($joinobject = $modx->getObject($classname, $object_id)) {
                     $joinobject->set('active', '1');
                     $joinobject->set('published', '1');
-                } 
+                }
                 $joinobject->save();
                 break;
             case 'unpublish':
@@ -61,9 +61,19 @@ switch ($config['sourceortarget']) {
         break;
 
     case 'source':
+    case 'pullsources':
     default:
-        $source_id = $scriptProperties['resource_id'];
-        $target_id = $scriptProperties['object_id'];
+        switch ($config['sourceortarget']) {
+            case 'source':
+                $source_id = $scriptProperties['resource_id'];
+                $target_id = $scriptProperties['object_id'];
+                break;
+            case 'pullsources':
+                $target_id = $scriptProperties['resource_id'];
+                $source_id = $scriptProperties['object_id'];            
+                break;
+        }
+
         switch ($scriptProperties['task']) {
             case 'publish':
                 if ($joinobject = $modx->getObject($joinclass, array('source_id' => $source_id, 'target_id' => $target_id))) {

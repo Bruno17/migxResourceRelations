@@ -26,40 +26,70 @@ if ($modx->lexicon) {
 }
 /*
 if (!empty($joinalias)) {
-    if ($fkMeta = $modx->getFKDefinition($classname, $joinalias)) {
-        $joinclass = $fkMeta['class'];
-        $joinvalues = array();
-    } else {
-        $joinalias = '';
-    }
-    if ($joinFkMeta = $modx->getFKDefinition($joinclass, 'Resource')) {
-        $localkey = $joinFkMeta['local'];
-    }
+if ($fkMeta = $modx->getFKDefinition($classname, $joinalias)) {
+$joinclass = $fkMeta['class'];
+$joinvalues = array();
+} else {
+$joinalias = '';
+}
+if ($joinFkMeta = $modx->getFKDefinition($joinclass, 'Resource')) {
+$localkey = $joinFkMeta['local'];
+}
 }
 */
 
-switch ($scriptProperties['task']) {
-    case 'activate':
-        if ($joinobject = $modx->getObject($joinclass, array('source_id' => $scriptProperties['resource_id'], 'target_id' => $scriptProperties['object_id']))) {
-            $joinobject->set('active', '1');
-        } else {
-            $joinobject = $modx->newObject($joinclass);
-            $joinobject->set('active', '1');
-            $joinobject->set('source_id', $scriptProperties['resource_id']);
-            $joinobject->set('target_id', $scriptProperties['object_id']);
+
+switch ($config['sourceortarget']) {
+    case 'pullsources':
+        switch ($scriptProperties['task']) {
+            case 'activate':
+                if ($joinobject = $modx->getObject($joinclass, array('target_id' => $scriptProperties['resource_id'], 'source_id' => $scriptProperties['object_id']))) {
+                    $joinobject->set('active', '1');
+                } else {
+                    $joinobject = $modx->newObject($joinclass);
+                    $joinobject->set('active', '1');
+                    $joinobject->set('target_id', $scriptProperties['resource_id']);
+                    $joinobject->set('source_id', $scriptProperties['object_id']);
+                }
+                $joinobject->save();
+                break;
+            case 'deactivate':
+                if ($joinobject = $modx->getObject($joinclass, array('target_id' => $scriptProperties['resource_id'], 'source_id' => $scriptProperties['object_id']))) {
+                    $joinobject->set('active', '0');
+                    $joinobject->set('published', '0');
+                    $joinobject->save();
+                }
+                break;
+            default:
+                break;
         }
-        $joinobject->save();
-        break;
-    case 'deactivate':
-        if ($joinobject = $modx->getObject($joinclass, array('source_id' => $scriptProperties['resource_id'], 'target_id' => $scriptProperties['object_id']))) {
-            $joinobject->set('active', '0');
-            $joinobject->set('published', '0');
-            $joinobject->save();
-        }    
-        break;
+
+    case 'source':
     default:
-        break;
+        switch ($scriptProperties['task']) {
+            case 'activate':
+                if ($joinobject = $modx->getObject($joinclass, array('source_id' => $scriptProperties['resource_id'], 'target_id' => $scriptProperties['object_id']))) {
+                    $joinobject->set('active', '1');
+                } else {
+                    $joinobject = $modx->newObject($joinclass);
+                    $joinobject->set('active', '1');
+                    $joinobject->set('source_id', $scriptProperties['resource_id']);
+                    $joinobject->set('target_id', $scriptProperties['object_id']);
+                }
+                $joinobject->save();
+                break;
+            case 'deactivate':
+                if ($joinobject = $modx->getObject($joinclass, array('source_id' => $scriptProperties['resource_id'], 'target_id' => $scriptProperties['object_id']))) {
+                    $joinobject->set('active', '0');
+                    $joinobject->set('published', '0');
+                    $joinobject->save();
+                }
+                break;
+            default:
+                break;
+        }
 }
+
 
 //clear cache for all contexts
 $collection = $modx->getCollection('modContext');
