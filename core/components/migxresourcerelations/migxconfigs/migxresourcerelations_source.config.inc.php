@@ -1,7 +1,7 @@
 <?php
 
 $this->customconfigs['sortConfig'] = '
-[{"Parent.pagetitle","ASC"},{"modResource.pagetitle","ASC"}]
+[{"sortby":"Parent.pagetitle","sortdir":"ASC"},{"sortby":"modResource.pagetitle","sortdir":"ASC"}]
 ';
 
 $this->customconfigs['sourceortarget'] = 'source';
