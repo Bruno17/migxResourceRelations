@@ -8,6 +8,8 @@ $textfield = $config['gridfilters'][$scriptProperties['searchname']]['combotextf
 $idfield = $config['gridfilters'][$scriptProperties['searchname']]['comboidfield'];
 $idfield = empty($idfield) ? $textfield : $idfield;
 
+$default_parent = $config['gridfilters'][$scriptProperties['searchname']]['default'];
+
 $prefix = !empty($config['prefix']) ? $config['prefix'] : null;
 $packageName = $config['packageName'];
 
@@ -47,6 +49,10 @@ $nodeparts = explode('_', $node);
 if (count($nodeparts) > 1) {
     $context = $nodeparts[0];
     $parent = $nodeparts[1];
+    
+    if ($context == 'currentctx' && !empty($default_parent)){
+        $parent = $default_parent;
+    }
 
     //$c->where(array('context_key' => $context));
 }
